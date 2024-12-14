@@ -1,7 +1,11 @@
 import { Image } from "@nextui-org/react";
+
+import { platform } from "@tauri-apps/plugin-os";
+
 function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [value, setValue] = useState("");
+  const currentPlatform = platform();
 
   const title = "This is an alert";
   const description = "Thanks for subscribing to our newsletter!";
@@ -9,6 +13,7 @@ function Home() {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   return (
     <div className="flex min-h-screen select-none flex-col items-center justify-center">
+      {JSON.stringify(currentPlatform)}
       <User
         avatarProps={{
           src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
