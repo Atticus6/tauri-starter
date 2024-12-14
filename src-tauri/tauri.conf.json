@@ -14,14 +14,15 @@
       {
         "title": "tauri-starter",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "visible": false
       }
     ],
     "security": {
       "csp": null
     }
   },
-  
+
   "bundle": {
     "active": true,
     "targets": "all",

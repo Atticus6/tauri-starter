@@ -2,13 +2,21 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "Capability for the main window",
-  "windows": [
-    "main"
-  ],
+  "windows": ["main", "tray"],
   "permissions": [
     "core:default",
     "opener:default",
     "os:default",
-    "core:app:allow-default-window-icon"
+    "core:app:allow-default-window-icon",
+    "theme:default",
+    "core:window:allow-set-cursor-visible",
+    "core:window:allow-hide",
+    "core:webview:allow-create-webview",
+    "core:window:allow-create",
+    "core:window:allow-close",
+    "core:window:allow-show",
+    "core:window:allow-is-visible",
+    "log:default",
+    "core:window:allow-get-all-windows"
   ]
 }

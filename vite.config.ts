@@ -1,10 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path"
-import AutoImport from 'unplugin-auto-import/vite'
+import path from "path";
+import AutoImport from "unplugin-auto-import/vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 
 const host = process.env.TAURI_DEV_HOST;
-
 
 const nextuiComponents = [
   "Accordion",
@@ -71,16 +71,26 @@ const nextuiComponents = [
   "TimeInput",
   "Tooltip",
   "User",
-]
+];
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [react(),AutoImport({
-    dts:"./src/types/auto-import.d.ts",
-    imports:["react",{
-      '@nextui-org/react': nextuiComponents,
-    }]
-  })],
+  plugins: [
+    TanStackRouterVite(),
+    react(),
+    AutoImport({
+      dts: "./src/types/auto-import.d.ts",
+      imports: [
+        "react",
+        {
+          "@nextui-org/react": nextuiComponents,
+        },
+      ],
+    }),
+  ],
+  build: {
+    cssCodeSplit: true, // 确保 CSS 被分离出来
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

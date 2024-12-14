@@ -1,7 +1,7 @@
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, TrayIconBuilder, TrayIconEvent},
-    Wry,
+    Manager, Wry,
 };
 
 struct TrayItem<'a> {
@@ -81,10 +81,24 @@ pub fn setup_tray_pop(app: &mut tauri::App) -> std::result::Result<(), Box<dyn s
     tray.on_tray_icon_event(|_tray, event| match event {
         TrayIconEvent::Click {
             button: MouseButton::Left,
+            position, // 获取鼠标点击位置
             ..
         } => {
-            println!("{:?}", event);
-            println!("{:?}", event.id())
+            let tray_label = "tray"; // 托盘窗口的标识符
+            if let Some(window) = _tray.app_handle().get_window(tray_label) {
+                // 设置窗口位置到点击点的下方
+                window
+                    .set_position(tauri::PhysicalPosition {
+                        x: position.x as i32 - 150,
+                        y: 10, // 将窗口放在点击点正下方
+                    })
+                    .expect("Failed to set window position");
+                // 显示窗口
+                window.show().expect("Failed to show window");
+                window.set_focus().expect("Failed to set_focus window");
+            } else {
+                log::error!("Tray window not found");
+            }
         }
         _ => {
 
