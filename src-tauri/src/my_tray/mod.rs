@@ -1,6 +1,6 @@
 use tauri::{
     menu::{Menu, MenuItem},
-    tray::{MouseButton, TrayIconBuilder, TrayIconEvent},
+    tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
     Manager, Wry,
 };
 
@@ -76,32 +76,38 @@ pub fn setup_tray_menu(
 pub fn setup_tray_pop(app: &mut tauri::App) -> std::result::Result<(), Box<dyn std::error::Error>> {
     let tray = TrayIconBuilder::new()
         .icon(app.default_window_icon().unwrap().clone())
-        .menu_on_left_click(true)
+        // .menu_on_left_click(true)
         .build(app)?;
     tray.on_tray_icon_event(|_tray, event| match event {
         TrayIconEvent::Click {
             button: MouseButton::Left,
-            position, // 获取鼠标点击位置
+            position,
+            button_state: MouseButtonState::Up,
             ..
         } => {
+            log::info!("触发了点击事件");
             let tray_label = "tray"; // 托盘窗口的标识符
             if let Some(window) = _tray.app_handle().get_window(tray_label) {
-                // 设置窗口位置到点击点的下方
-                window
-                    .set_position(tauri::PhysicalPosition {
-                        x: position.x as i32 - 150,
-                        y: 10, // 将窗口放在点击点正下方
-                    })
-                    .expect("Failed to set window position");
-                // 显示窗口
-                window.show().expect("Failed to show window");
-                window.set_focus().expect("Failed to set_focus window");
+                if window.is_visible().unwrap_or(false) {
+                    // If the window is visible, hide it
+                    window.hide().expect("Failed to hide window");
+                } else {
+                    // Otherwise, set window position to click position and show it
+                    window
+                        .set_position(tauri::PhysicalPosition {
+                            x: position.x as i32 - 150,
+                            y: 10, // 将窗口放在点击点正下方
+                        })
+                        .expect("Failed to set window position");
+
+                    window.show().expect("Failed to show window");
+                    window.set_focus().expect("Failed to set_focus window");
+                }
             } else {
                 log::error!("Tray window not found");
             }
         }
         _ => {
-
             // println!("unhandled event {event:?}");
         }
     });

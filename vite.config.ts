@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import path from "path";
 import AutoImport from "unplugin-auto-import/vite";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
-
+import { reactRouter } from "@react-router/dev/vite";
+import autoprefixer from "autoprefixer";
+import tailwindcss from "tailwindcss";
 const host = process.env.TAURI_DEV_HOST;
 
 const nextuiComponents = [
@@ -76,8 +76,7 @@ const nextuiComponents = [
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
   plugins: [
-    TanStackRouterVite(),
-    react(),
+    reactRouter(),
     AutoImport({
       dts: "./src/types/auto-import.d.ts",
       imports: [
@@ -94,6 +93,11 @@ export default defineConfig(async () => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  css: {
+    postcss: {
+      plugins: [tailwindcss, autoprefixer],
     },
   },
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`

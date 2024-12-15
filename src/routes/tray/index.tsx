@@ -1,10 +1,4 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
-
-export const Route = createLazyFileRoute("/tray")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+function Rray() {
   useEffect(() => {
     document.documentElement.style.backgroundColor = "transparent";
   }, []);
@@ -12,3 +6,5 @@ function RouteComponent() {
     <div className="min-h-screen rounded-md bg-background">Hello "/tray"!</div>
   );
 }
+
+export default Rray;

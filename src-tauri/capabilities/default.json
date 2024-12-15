@@ -17,6 +17,8 @@
     "core:window:allow-show",
     "core:window:allow-is-visible",
     "log:default",
-    "core:window:allow-get-all-windows"
+    "core:window:allow-get-all-windows",
+    "core:window:default",
+    "core:window:allow-start-dragging"
   ]
 }
