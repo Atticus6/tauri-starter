@@ -36,6 +36,8 @@ if (!rootElement.innerHTML) {
 function ThemeProvider({ children }: PropsWithChildren) {
   const { theme } = useTheme();
   return (
-    <main className={`${theme} bg-background text-foreground`}>{children}</main>
+    <main className={`${theme} bg-transparent text-foreground`}>
+      {children}
+    </main>
   );
 }

@@ -9,7 +9,9 @@
     "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },
+
   "app": {
+    "macOSPrivateApi": true,
     "windows": [
       {
         "title": "tauri-starter",

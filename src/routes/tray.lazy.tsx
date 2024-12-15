@@ -5,5 +5,10 @@ export const Route = createLazyFileRoute("/tray")({
 });
 
 function RouteComponent() {
-  return <div>Hello "/tray"!</div>;
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = "transparent";
+  }, []);
+  return (
+    <div className="min-h-screen rounded-md bg-background">Hello "/tray"!</div>
+  );
 }

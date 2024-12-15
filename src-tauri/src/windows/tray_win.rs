@@ -19,7 +19,15 @@ pub fn setup_tray_win(app: &mut tauri::App) -> std::result::Result<(), Box<dyn s
     .inner_size(300.0, 100.0) // 设置窗口尺寸
     .decorations(false)
     .visible(false)
+    .transparent(true)
+    .shadow(true)
+    .resizable(false)
+    // 不受台前调度影响
+    .always_on_top(true)
     .build();
+
+    // #[cfg(target_os = "macos")]
+    // {}
 
     match tray_window {
         Ok(window) => {
