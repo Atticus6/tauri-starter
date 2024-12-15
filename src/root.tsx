@@ -10,6 +10,8 @@ import type { Route } from "./+types/root";
 import { NextUIProvider } from "@nextui-org/react";
 import stylesheet from "./assets/index.css?url";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { setupMenu } from "./utils/window";
+import { useTranslation } from "react-i18next";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -45,6 +47,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const { t } = useTranslation("menu");
+  useEffect(() => {
+    setupMenu(t);
+  }, [t]);
   return (
     <NextUIProvider>
       <NextThemesProvider attribute="class">

@@ -1,0 +1,9 @@
+{
+  "language": "语言",
+  "switch": "选择",
+  "menu": {
+    "about": "关于{{appName, string}}",
+    "quit": "退出{{appName, string}}",
+    "update": "检查更新"
+  }
+}

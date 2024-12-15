@@ -1,0 +1,9 @@
+{
+  "language": "Language",
+  "switch": "Switch",
+  "menu": {
+    "about": "About {{appName, string}}",
+    "quit": "Quit {{appName, string}}",
+    "update": "Check for updates"
+  }
+}

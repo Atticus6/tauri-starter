@@ -74,10 +74,13 @@ pub fn setup_tray_menu(
 }
 
 pub fn setup_tray_pop(app: &mut tauri::App) -> std::result::Result<(), Box<dyn std::error::Error>> {
+    let tray_win = app.get_window("tray").expect("未找到");
+    let tray_app = tray_win.app_handle();
+
     let tray = TrayIconBuilder::new()
         .icon(app.default_window_icon().unwrap().clone())
         // .menu_on_left_click(true)
-        .build(app)?;
+        .build(tray_app)?;
     tray.on_tray_icon_event(|_tray, event| match event {
         TrayIconEvent::Click {
             button: MouseButton::Left,

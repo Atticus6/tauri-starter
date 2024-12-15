@@ -19,5 +19,25 @@ pub fn setup_win(app: &mut tauri::App) -> std::result::Result<(), Box<dyn std::e
         }
     });
 
+    // let menu_handle = main_window.menu().unwrap();
+    // println!("{:?}", menu_handle);
+    // menu_handle.popup(main_window).unwrap();
+
+    // #[cfg(not(debug_assertions))]
+    // {
+    //     // 禁用右键菜单
+    //     let main_webview = main_window.get_webview("main");
+    //     if let Some(t) = main_webview {
+    //         t.eval(
+    //             r#"
+    //     window.addEventListener('contextmenu', (e) => {
+    //         e.preventDefault();
+    //     });
+    //     "#,
+    //         )
+    //         .unwrap();
+    //     }
+    // }
+
     Ok(())
 }

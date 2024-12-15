@@ -1,4 +1,5 @@
 use my_tray::setup_tray_pop;
+
 use windows::{main_win::setup_win, tray_win::setup_tray_win};
 
 pub mod my_tray;
@@ -16,8 +17,8 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .setup(|app: &mut tauri::App| {
             // setup_tray_menu(app)?;
-            setup_tray_pop(app)?;
             setup_tray_win(app)?;
+            setup_tray_pop(app)?;
             setup_win(app)?;
             Ok(())
         })
